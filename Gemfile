@@ -47,4 +47,5 @@ group :development do
 end
 
 gem "pry-rails"
+gem 'redis-actionpack'
 
