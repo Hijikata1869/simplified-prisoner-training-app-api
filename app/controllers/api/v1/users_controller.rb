@@ -20,9 +20,13 @@ module Api
 
       def create
         user = User.new(user_params)
+        # binding.pry
         if user.save
+          session[:user_id] = user.id
+          # binding.pry
           render json: {
-            user: user
+            user: user,
+            sesison_id: session.id.public_id
           }, status: :ok
         else
           render json: {
@@ -33,7 +37,7 @@ module Api
 
       private
       def user_params
-        params.require(:user).permit(:name, :email, :password, :password_confirmation)
+        params.permit(:name, :email, :password, :password_confirmation)
       end
 
     end

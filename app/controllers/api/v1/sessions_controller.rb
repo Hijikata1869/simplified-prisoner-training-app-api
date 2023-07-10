@@ -9,7 +9,7 @@ module Api
         password = params[:password]
         
         if login(email, password)
-          binding.pry
+          # binding.pry
           render json: {
             message: "ログインに成功しました"
           }, status: :ok
