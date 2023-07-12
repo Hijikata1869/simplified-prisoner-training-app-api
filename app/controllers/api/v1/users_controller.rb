@@ -15,23 +15,22 @@ module Api
 
         render json: {
           user: user
-        }, status: :ok
+        }
       end
 
       def create
         user = User.new(user_params)
         # binding.pry
         if user.save
-          session[:user_id] = user.id
-          # binding.pry
+          login!(user)
+          binding.pry
           render json: {
-            user: user,
-            sesison_id: session.id.public_id
-          }, status: :ok
+            user: user
+          }
         else
           render json: {
-            message: "ユーザーを作成できませんでした"
-          }, status: 422
+            status: 500
+          }
         end
       end
 
