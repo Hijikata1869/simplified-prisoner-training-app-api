@@ -3,7 +3,6 @@ module Api
     class SessionsController < ApplicationController
       def new
         user_session = session[params[:session_id]]
-        # binding.pry
       end
 
       def create
@@ -11,8 +10,9 @@ module Api
         password = params[:password]
         
         if login(email, password)
+          session_id = session.id.public_id
           render json: {
-            message: "ログインに成功しました"
+            session_id: session_id
           }, status: :ok
         else 
           render json: {

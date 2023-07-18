@@ -7,7 +7,7 @@ module Api
 
         render json: {
           users: users
-        }, status: :ok
+        }
       end
 
       def show
@@ -23,7 +23,7 @@ module Api
         # binding.pry
         if user.save
           login!(user)
-          binding.pry
+          # binding.pry
           render json: {
             user: user
           }

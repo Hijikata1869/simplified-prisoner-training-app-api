@@ -7,7 +7,7 @@ module Api
 
         render json: {
           trainingLogs: training_logs
-        }, status: :ok
+        }
       end
 
       def show
@@ -24,11 +24,11 @@ module Api
         if training_log.save
           render json: {
             trainingLog: training_log
-          }, status: :ok
+          }
         else
           render json: {
-            message: "トレーニングを記録できませんでした"
-          }, status: 422
+            status: 500
+          }
         end
       end
 
