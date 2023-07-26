@@ -4,10 +4,8 @@ Rails.application.routes.draw do
       resources :users do
         resources :training_logs
       end
-
-      get 'training_logs', to: 'training_logs#index'
       
-      get 'login', to: 'sessions#new'
+      get 'login', to: 'sessions#index'
       post 'login', to: 'sessions#create'
       delete 'login', to: 'sessions#destroy'
 

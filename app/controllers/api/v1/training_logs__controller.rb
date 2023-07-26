@@ -3,19 +3,28 @@ module Api
     class TrainingLogsController < ApplicationController
       
       def index
-        training_logs = TrainingLog.all
+        user_training_logs = []
+        pushup = TrainingLog.where(user_id: params[:user_id], training_menu: "プッシュアップ").order(id: 'DESC').limit(1)[0]
+        squat = TrainingLog.where(user_id: params[:user_id], training_menu: "スクワット").order(id: 'DESC').limit(1)[0]
+        pullup = TrainingLog.where(user_id: params[:user_id], training_menu: "プルアップ").order(id: 'DESC').limit(1)[0]
+        leg_raise = TrainingLog.where(user_id: params[:user_id], training_menu: "レッグレイズ").order(id: 'DESC').limit(1)[0]
+        bridge = TrainingLog.where(user_id: params[:user_id], training_menu: "ブリッジ").order(id: 'DESC').limit(1)[0]
+        handstand_pushup = TrainingLog.where(user_id: params[:user_id], training_menu: "ハンドスタンドプッシュアップ").order(id: 'DESC').limit(1)[0]
+        user_training_logs.push(pushup, squat, pullup, leg_raise, bridge, handstand_pushup)
+        user_training_logs.delete(nil)
 
-        render json: {
-          trainingLogs: training_logs
-        }
+        if user_training_logs.length != 0
+          render json: {
+            userTrainingLogs: user_training_logs
+          }, status: 200
+        else
+          render json: {
+            message: "トレーニング記録がありません"
+          }, status: 500
+        end
       end
 
       def show
-        training_log = TrainingLog.find(params[:id])
-
-        render json: {
-          trainingLog: training_log
-        }, status: :ok
       end
 
       def create

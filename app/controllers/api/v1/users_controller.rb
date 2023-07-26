@@ -20,13 +20,13 @@ module Api
 
       def create
         user = User.new(user_params)
-        # binding.pry
         if user.save
-          login!(user)
-          # binding.pry
+          login(email, password)
+          session_id = session.id.public_id
           render json: {
-            user: user
-          }
+            user: user,
+            session_id: session_id
+          }, status: 200
         else
           render json: {
             status: 500
@@ -37,6 +37,15 @@ module Api
       private
       def user_params
         params.permit(:name, :email, :password, :password_confirmation)
+      end
+
+      def login(email, password)
+        user = User.find_by(email: email)
+
+        return false unless user && user.authenticate(password)
+
+        session[:user_id] = user.id
+        true
       end
 
     end
