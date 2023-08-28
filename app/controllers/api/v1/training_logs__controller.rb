@@ -33,11 +33,26 @@ module Api
         if training_log.save
           render json: {
             trainingLog: training_log
-          }
+          }, status: 200
         else
           render json: {
             status: 500
           }
+        end
+      end
+
+      def destroy
+        training_log = TrainingLog.find(params[:id])
+
+        if current_user.present?
+          training_log.destroy
+          render json: {
+            message: "削除完了",
+          }, status: 200
+        else
+          render json: {
+            message: "削除できませんでした",
+          }, status: 500
         end
       end
 

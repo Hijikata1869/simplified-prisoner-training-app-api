@@ -16,7 +16,10 @@ gem "puma", "~> 5.0"
 # gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
+# gem 'redis'
+# gem 'redis-rails'
+# gem 'redis-store'
+# gem 'redis-session-store'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -47,5 +50,7 @@ group :development do
 end
 
 gem "pry-rails"
+
 gem 'redis-actionpack'
+gem "redis", "~> 4.8.1", "< 5"
 

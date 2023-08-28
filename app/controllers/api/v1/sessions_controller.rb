@@ -2,14 +2,14 @@ module Api
   module V1
     class SessionsController < ApplicationController
       def index
-        if session[:user_id].present?
+        if logged_in?
           render json: {
             loggedIn: true
-          }, status: 200
+          }
         else
           render json: {
             loggedIn: false
-          }, status: 200
+          }
         end
       end
 
@@ -17,30 +17,29 @@ module Api
         email = params[:email]
         password = params[:password]
         if login(email, password)
-          binding.pry
           session_id = session.id.public_id
           user = User.find(session[:user_id])
           render json: {
-            session_id: session_id,
+            sessionId: session_id,
             user: user
           }, status: 200
-        else 
+        else
           render json: {
-            message: "ログインに失敗しました"
-          }, status: 401
+            message: "ログインできませんでした"
+          }, status: 500
         end
       end
 
       def destroy
-        if session.id.public_id == params[:session_id]
-          session[:user_id] = nil
+        if cookies["_pta_session"].present?
+          session.delete(:user_id)
           render json: {
             message: "ログアウトしました"
           }, status: 200
         else
           render json: {
-            message: "ログアウトに失敗しました"
-          }, statu: 500
+            message: "ログアウトできませんでした"
+          }, stauts: 500
         end
       end
 

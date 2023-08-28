@@ -9,12 +9,9 @@ module Api
         # session_key = "#{namespace}::#{session_id}"
         # session_user_id = Marshal.load(redis.get(session_key))["user_id"]
         # current_user = User.find(session_user_id)
-
-        binding.pry
-        if session[:user_id].present?
-          current_user = User.find(session[:user_id])
+        if current_user.present?
           render json: {
-            current_user: current_user
+            currentUser: current_user
           }, status: 200
         else
           render json: {
