@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: simplified_prisoner_training_app_backend_production
-  username: simplified_prisoner_training_app_backend
+  database: simplified-prisoner-training-app-api-db
+  username: postgres
   password: <%= ENV["SIMPLIFIED_PRISONER_TRAINING_APP_BACKEND_DATABASE_PASSWORD"] %>
