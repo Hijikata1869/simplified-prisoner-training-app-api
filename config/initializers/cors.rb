@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:3000", "https://simplified-prisoner-training-app-frontend-e7orhliq3.vercel.app/", "https://vercel.com/hijikata1869/simplified-prisoner-training-app-frontend/BEetMhVJ5VaV4WAe6Bmoa7ygzcnQ", "https://simplified-prisoner-training-app-frontend.vercel.app/"
+    origins "http://localhost:3000", "https://simplified-prisoner-training-app-frontend.vercel.app"
 
     resource "*",
       headers: :any,
