@@ -87,7 +87,7 @@ Rails.application.configure do
   config.session_store :redis_store,
   servers: %W(#{ENV["REDIS_PRODUCTION_URL"]}),
   key: '_pta_session',
-  expire_after: 90.minutes,
+  expire_in: 90.minutes,
   httponly: false
 
 end
