@@ -90,7 +90,7 @@ Rails.application.configure do
   expire_after: 90.minutes,
   httponly: false
 
-  config.middleware.insert_afte ActionDispatch::Executor, ActionDispatch::ServerTiming
+  config.middleware.insert_after ActionDispatch::Executor, ActionDispatch::ServerTiming
 
   config.middleware.insert_after ActionDispatch::ServerTiming, ActiveSupport::Cache::Strategy::LocalCache::Middleware
 
