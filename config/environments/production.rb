@@ -90,15 +90,15 @@ Rails.application.configure do
   expire_after: 90.minutes,
   httponly: false
 
-  config.middleware.insert_before Rack::Runtime, ActionDispatch::ServerTiming
+  config.middleware.insert_before Rack::Runtime, ActionDispatch::ServerTiming, page_cache: false
 
-  config.middleware.insert_before Rack::Runtime, ActiveSupport::Cache::Strategy::LocalCache::Middleware
+  config.middleware.insert_before Rack::Runtime, ActiveSupport::Cache::Strategy::LocalCache::Middleware, page_cache: false
 
-  config.middleware.insert_before ActionDispatch::Callbacks, ActionDispatch::ActionableExceptions
+  config.middleware.insert_before ActionDispatch::Callbacks, ActionDispatch::ActionableExceptions, page_cache: false
 
-  config.middleware.insert_before ActionDispatch::Callbacks, ActionDispatch::Reloader
+  config.middleware.insert_before ActionDispatch::Callbacks, ActionDispatch::Reloader, page_cache: false
 
-  config.middleware.insert_before ActionDispatch::Cookies, ActiveRecord::Migration::CheckPending
+  config.middleware.insert_before ActionDispatch::Cookies, ActiveRecord::Migration::CheckPending, page_cache: false
 
 
 end
