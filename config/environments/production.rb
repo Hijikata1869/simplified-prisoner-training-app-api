@@ -94,7 +94,7 @@ Rails.application.configure do
 
   config.middleware.insert_after ActionDispatch::ServerTiming, ActiveSupport::Cache::Strategy::LocalCache::Middleware
 
-  config.middleware.insert_after Sentry::Rails::RescuedExceptionInterceptor, ActionDispatch::ActionableExceptions
+  config.middleware.insert_before ActionDispatch::Callbacks, ActionDispatch::ActionableExceptions
 
   config.middleware.insert_after ActionDispatch::ActionableExceptions, ActionDispatch::Reloader
 
