@@ -94,10 +94,10 @@ Rails.application.configure do
 
   config.middleware.insert_after ActionDispatch::ServerTiming, ActiveSupport::Cache::Strategy::LocalCache::Middleware
 
-  config.middleware.insert_after Sentry::Rails::RescuedExceptionInterceptor, use ActionDispatch::ActionableExceptions
+  config.middleware.insert_after Sentry::Rails::RescuedExceptionInterceptor, ActionDispatch::ActionableExceptions
 
   config.middleware.insert_after ActionDispatch::ActionableExceptions, ActionDispatch::Reloader
-  
+
   config.middleware.insert_after ActionDispatch::Callbacks, ActiveRecord::Migration::CheckPending
 
 
