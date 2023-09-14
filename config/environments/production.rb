@@ -2,6 +2,15 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  config.middleware.use ActionDispatch::ServerTiming
+
+  config.middleware.use ActiveSupport::Cache::Strategy::LocalCache::Middleware
+
+  config.middleware.use ActionDispatch::ActionableExceptions
+
+  config.middleware.use ActionDispatch::Reloader
+
+  config.middleware.use ActiveRecord::Migration::CheckPending
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -88,7 +97,7 @@ Rails.application.configure do
   servers: %W(#{ENV["REDIS_PRODUCTION_URL"]}),
   key: '_pta_session',
   expire_after: 90.minutes,
-  httponly: false,
+  httponly: false
 
   # config.middleware.insert_before Rack::Runtime, ActionDispatch::ServerTiming
 
@@ -99,15 +108,5 @@ Rails.application.configure do
   # config.middleware.insert_before ActionDispatch::Callbacks, ActionDispatch::Reloader
 
   # config.middleware.insert_before ActionDispatch::Cookies, ActiveRecord::Migration::CheckPending
-
-  config.middleware.use ActionDispatch::ServerTiming
-
-  config.middleware.use ActiveSupport::Cache::Strategy::LocalCache::Middleware
-
-  config.middleware.use ActionDispatch::ActionableExceptions
-
-  config.middleware.use ActionDispatch::Reloader
-
-  config.middleware.use ActiveRecord::Migration::CheckPending
 
 end
