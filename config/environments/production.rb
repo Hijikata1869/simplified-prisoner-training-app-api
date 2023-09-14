@@ -88,7 +88,7 @@ Rails.application.configure do
   servers: %W(#{ENV["REDIS_PRODUCTION_URL"]}),
   key: '_pta_session',
   expire_after: 90.minutes,
-  httponly: false
+  httponly: false,
 
   # config.middleware.insert_before Rack::Runtime, ActionDispatch::ServerTiming
 
